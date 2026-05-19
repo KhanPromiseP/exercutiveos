@@ -1,0 +1,41 @@
+import { NextRequest, NextResponse } from "next/server"
+import { auth } from "@/lib/auth"
+import dbConnect from "@/lib/db"
+import Reminder from "@/models/Reminder"
+
+export async function GET(req: NextRequest) {
+  try {
+    const session = await auth()
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+
+    await dbConnect()
+    const reminders = await Reminder.find({ userId: session.user.id }).sort({ dueDate: 1 })
+    
+    return NextResponse.json(reminders)
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const session = await auth()
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+
+    const data = await req.json()
+    await dbConnect()
+    
+    const reminder = await Reminder.create({
+      ...data,
+      userId: session.user.id
+    })
+    
+    return NextResponse.json(reminder, { status: 201 })
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
