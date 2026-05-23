@@ -8,6 +8,8 @@ export interface IUser extends Document {
   password?: string // Only for credentials provider
   emailVerified: boolean
   verificationToken?: string
+  resetPasswordToken?: string
+  resetPasswordExpiry?: Date
   pushSubscriptions?: any[] // Web Push subscriptions
   preferences?: {
     theme?: string
@@ -35,6 +37,8 @@ const UserSchema: Schema = new Schema(
     password: { type: String }, // Hashed password
     emailVerified: { type: Boolean, default: false },
     verificationToken: { type: String },
+    resetPasswordToken: { type: String },
+    resetPasswordExpiry: { type: Date },
     pushSubscriptions: [{ type: Schema.Types.Mixed }], // Array of Web Push subscription objects
     preferences: {
       theme: { type: String, default: "system" },

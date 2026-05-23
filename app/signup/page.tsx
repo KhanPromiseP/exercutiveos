@@ -78,59 +78,58 @@ export default function SignupPage() {
     }
   }
 
-  if (success) {
-    return (
-      <div className="min-h-screen flex flex-col bg-background">
-        <header className="flex items-center justify-between p-4 border-b border-border">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-              <Shield className="h-4 w-4 text-primary-foreground" />
-            </div>
-            <span className="font-semibold text-foreground">Executive OS</span>
-          </Link>
-          <ThemeToggle />
-        </header>
-        <main className="flex-1 flex items-center justify-center p-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-center"
-          >
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[var(--success)]/10 mb-4">
-              <CheckCircle2 className="h-8 w-8 text-[var(--success)]" />
-            </div>
-            <h2 className="text-2xl font-bold text-foreground mb-2">Account Created!</h2>
-            <p className="text-muted-foreground mb-2 max-w-sm text-center">
-              Your account has been created successfully.
-            </p>
+    if (success) {
+      return (
+        <div className="min-h-screen flex flex-col bg-background">
+          <header className="flex items-center justify-between p-4 border-b border-border">
+            <Link href="/" className="flex items-center gap-2">
+              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
+                <Shield className="h-4 w-4 text-primary-foreground" />
+              </div>
+              <span className="font-semibold text-foreground">Executive OS</span>
+            </Link>
+            <ThemeToggle />
+          </header>
+          <main className="flex-1 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center"
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[var(--success)]/10 mb-4">
+                <CheckCircle2 className="h-8 w-8 text-[var(--success)]" />
+              </div>
+              <h2 className="text-2xl font-bold text-foreground mb-2">Account Created!</h2>
+              <p className="text-muted-foreground mb-2 max-w-sm text-center">
+                Your account has been created successfully.
+              </p>
 
-            <p className="text-sm text-muted-foreground max-w-sm text-center">
-              We've sent a verification email to your inbox.
-              Please click the verification link before logging in.
-            </p>
+              <p className="text-sm text-muted-foreground max-w-sm text-center">
+                We've sent a verification email to your inbox.
+                Please click the verification link before logging in.
+              </p>
 
-            <div className="mt-6 flex flex-col gap-3 w-full max-w-xs">
-              <Button
-                className="w-full"
-                onClick={() => router.push("/login")}
-              >
-                Go to Login
-              </Button>
+              <div className="mt-6 flex flex-col gap-3 w-full max-w-xs mx-auto">
+                <Button
+                  className="w-full"
+                  onClick={() => router.push("/login")}
+                >
+                  Go to Login
+                </Button>
 
-              <Button
-                variant="outline"
-                className="w-full"
-                onClick={() => window.location.reload()}
-              >
-                Resend Verification Email
-              </Button>
-            </div>
-            <Loader2 className="h-5 w-5 animate-spin mx-auto text-primary" />
-          </motion.div>
-        </main>
-      </div>
-    )
-  }
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => window.location.reload()}
+                >
+                  Resend Verification Email
+                </Button>
+              </div>
+            </motion.div>
+          </main>
+        </div>
+      )
+    }
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
