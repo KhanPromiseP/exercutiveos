@@ -14,17 +14,21 @@ if (!cached) {
   cached = global.mongoose = { conn: null, promise: null }
 }
 
+const MONGODB_OPTIONS = {
+  bufferCommands: false,
+  serverSelectionTimeoutMS: 25000,
+  connectTimeoutMS: 25000,
+  socketTimeoutMS: 30000,
+  tls: true,
+}
+
 async function dbConnect() {
   if (cached.conn) {
     return cached.conn
   }
 
   if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-    }
-
-    cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongoose) => {
+    cached.promise = mongoose.connect(MONGODB_URI!, MONGODB_OPTIONS).then((mongoose) => {
       return mongoose
     })
   }
